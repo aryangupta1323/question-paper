@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Question Paper</title>
+		<link rel="stylesheet" href="questions.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Question Paper</h1>
+			<ol class="question-list">
+				<% if(qArray.length){ %> <% qArray.forEach((question, index) => { %>
+				<li class="question">
+					<span class="question-number"><%= index + 1 %>.</span>
+					<span class="question-wording"><%= question.wording %></span>
+					<span class="question-difficulty"><%= question.difficulty %></span>
+				</li>
+				<% }) %> <% } else { %>
+				<h2 class="no-questions">No questions are there</h2>
+				<% } %>
+			</ol>
+		</div>
+	</body>
+</html>

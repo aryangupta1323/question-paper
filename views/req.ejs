@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Question Paper Requirement</title>
+		<link rel="stylesheet" href="req.css" />
+	</head>
+	<body>
+		<h1>Question Paper</h1>
+		<h3>
+			Kindly provide all the requirements for the question paper, so as to
+			generate the best paper possible.
+		</h3>
+		
+		<div class="qform">
+			<% if(error.length>0){ %>
+				<div id="errorMessage" class="error"><%= error[0]%></div>
+			<% } %>
+			<form id="questionForm" method="POST" action="/requirement">
+				<label for="marks">Total Marks</label>
+				<input
+					class="inputs"
+					type="number"
+					id="marks"
+					oninput="updateSum()"
+					name="marks"
+					required
+				/>
+
+				<label for="easy">Easy Questions(In %)</label>
+				<input
+					class="inputs"
+					type="number"
+					id="easy"
+					oninput="updateSum()"
+					name="easy"
+					required
+				/>
+
+				<label for="medium">Medium Questions(In %)</label>
+				<input
+					class="inputs"
+					type="number"
+					id="medium"
+					name="medium"
+					oninput="updateSum()"
+					required
+				/>
+
+				<label for="hard">Hard Questions(In %)</label>
+				<input
+					class="inputs"
+					type="number"
+					id="hard"
+					name="hard"
+					oninput="updateSum()"
+					required
+				/>
+
+				<div id="errorMessage" class="error"></div>
+
+				<button id="submitButton" class="inputs" type="submit">Submit</button>
+			</form>
+		</div>
+
+		<script>
+			 function updateSum() {
+            const easyPercentage = parseInt(document.getElementById("easy").value) || 0;
+            const mediumPercentage = parseInt(document.getElementById("medium").value) || 0;
+            const hardPercentage = parseInt(document.getElementById("hard").value) || 0;
+
+            const sum = easyPercentage + mediumPercentage + hardPercentage;
+
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "";
+
+            const submitButton = document.getElementById("submitButton");
+            submitButton.disabled = sum !== 100;
+
+            if (sum !== 100) {
+                errorMessage.textContent = "Sum of percentages must be 100%";
+            }
+        }
+
+        document.getElementById("marks").addEventListener("input", updateSum);
+    </script>
+		</script>
+	</body>
+</html>
